@@ -1,0 +1,25 @@
+<!-- Site footer -->
+<div class="bottom">
+    <%= will_paginate @articles1 %>
+    <div class="container">
+        
+            <% @articles1.each do |article| %>
+        <div class="col-md-4">
+           <tr>
+      <td><%= link_to article.title, article_path(article) %></td> </tr>
+      <tr><td><%= article.author %></td></tr>
+      <tr><td><%= article.category %></td></tr>
+      <tr><td><%= article.content_body %></td></tr>
+        </div>
+        
+          <% end %>
+    </div>
+    
+
+
+
+            
+
+  
+</div>
+

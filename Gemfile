@@ -10,7 +10,8 @@ gem 'sdoc',                 '0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'sass-rails',           '5.0.2'
 gem 'autoprefixer-rails'
-
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 
 

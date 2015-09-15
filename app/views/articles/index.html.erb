@@ -1,9 +1,9 @@
 <h1>Listing articles</h1>
- 
+
  <%= link_to 'New article', new_article_path %>
- 
+
 <table>
-  
+
  
   <% @articles.each do |article| %>
     <tr>
@@ -14,4 +14,8 @@
 
             
   <% end %>
+  
+
 </table>
+
+  <%= will_paginate @articles, :param_name => 'articles_page'%>
