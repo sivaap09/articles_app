@@ -1,3 +1,22 @@
+	<!-- Initialize a new AngularJS app and associate it with a module named "instantSearch"-->
+		<div class="bar">
+			<!-- Create a binding between the searchString model and the text field -->
+			<input type="text" ng-model="searchString" placeholder="Enter your search terms" />
+		</div>
+
+		<ul>
+			<!-- Render a li element for every entry in the items array. Notice
+				 the custom search filter "searchFor". It takes the value of the
+				 searchString model as an argument.
+			 -->
+			<li ng-repeat="i in articles | searchFor:searchString">
+				<a href="{{i.url}}"><img ng-src="{{i.image}}" /></a>
+				<p>{{i.title}}</p>
+			</li>
+		</ul>
+
+
+
 <h1>Listing articles</h1>
 
  <%= link_to 'New article', new_article_path %>
@@ -8,8 +27,12 @@
   <% @articles.each do |article| %>
     <tr>
       <td><%= link_to article.title, article_path(article) %></td> </tr>
+      <tr><td>asdsad<%= article.publication_date %></td></tr>
       <tr><td><%= article.author %></td></tr>
       <tr><td><%= article.category %></td></tr>
+            <tr><td><%= article.filename %></td></tr>
+                        <tr><td><%= article.content_type %></td></tr>
+
       <tr><td><%= article.content_body %></td></tr>
 
             
@@ -18,4 +41,4 @@
 
 </table>
 
-  <%= will_paginate @articles, :param_name => 'articles_page'%>
+  <%= will_paginate @articles, :param_name => 'mpage'%>

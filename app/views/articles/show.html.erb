@@ -1,6 +1,18 @@
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
+
+  sadsa
+
+  <% if @article.hero_image == "binary_data" %>
+<img src="<%= url_for(:controller => "articles", 
+ :action => "image_view", 
+ :id => @article.id) %>" />
+ 
+  <% end%>
+   
+
+
 </p>
  
  

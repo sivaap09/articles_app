@@ -3,17 +3,21 @@
 one:
   title: MyString
   author: MyString
-  publication_date: 2015-09-14
+  publication_date: 2015-09-16 11:11:38
   category: MyString
   hero_image: 
   optional_image: 
+  filename: MyString
+  content_type: MyString
   content_body: MyText
 
 two:
   title: MyString
   author: MyString
-  publication_date: 2015-09-14
+  publication_date: 2015-09-16 11:11:38
   category: MyString
   hero_image: 
   optional_image: 
+  filename: MyString
+  content_type: MyString
   content_body: MyText

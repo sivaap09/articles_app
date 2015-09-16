@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'footer/index'
+  get 'articles/image_view'       ## foo is the name of your controller
 
   resources :articles
 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
