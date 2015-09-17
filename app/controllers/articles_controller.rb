@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
     
     def index
-        @articles = Article.paginate(page: params[:mpage], :per_page => 5)
+        @articles = Article.order(publication_date: :desc).paginate(page: params[:mpage], :per_page => 5)
         @articles1 = Article.paginate(page: params[:fpage], :per_page => 3) 
     end
   
@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   def create
 
 @article = Article.new(article_params)
-@article.publication_date = Time.now
+@article.publication_date = Time.zone.now
 
       if params[:article][:hero_image]
         @article.hero_image = params[:article][:hero_image].read
@@ -35,7 +35,8 @@ class ArticlesController < ApplicationController
   end
    
 def image_view
-    @article = Article.find(params[:id]) 
+
+@article = Article.find(params[:id]) 
     
  send_data(@article.hero_image,
  :filename => @article.filename,

@@ -1,10 +1,12 @@
+<H2> Show article</H2>
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
-
-  sadsa
-
-  <% if @article.hero_image == "binary_data" %>
+  <%= @article.content_type %>
+    <%= @article.filename %>
+    
+    <% if not @article.filename.nil?  %>
+    sadsaddadas
 <img src="<%= url_for(:controller => "articles", 
  :action => "image_view", 
  :id => @article.id) %>" />

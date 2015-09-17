@@ -1,7 +1,25 @@
 // Define a new module for our app
-var app = angular.module("instantSearch", []);
+var app = angular.module('app', ['ngResource','CalculatorService','StudentService']);
 
 // Create the instant search filter
+
+app.controller('StudentController', function ($scope, Tasks) {
+    $scope.status;
+    $scope.students;
+    getStudents();
+
+    function getStudents() {
+        Tasks.service()
+            .success(function (articles) {
+                $scope.items = articles;
+            })
+            .error(function (error) {
+                $scope.status = 'Unable to load customer data: ' + error.message;
+            });
+    }
+
+    });
+
 
 app.filter('searchFor', function(){
 alert("sads");
@@ -33,15 +51,44 @@ alert("sads");
 
 });
 
+app.controller('CalculatorController', function ($scope, Calculator) {
+
+    $scope.findSquare = function () {
+        $scope.answer = Calculator.add($scope.number);
+    }
+});
+
+
+
+
+
 // The controller
 
-function InstantSearchController($scope){
+app.controller('InstantSearchController', function($scope, $resource){
+alert("testtstts");
+/*$http.get('articles/').success(function(data){
+	alert("dasdsad");
+        alert(data);
+        //  $scope.items = data;
+          alert("dasdsad");
+        });
+
+var service = $resource("/articles/",
+    {},
+    {'query': {method: 'GET', isArray: true, "transformResponse": function (data) {
+        return JSON.parse(data).objects;
+    }}});
+    */
+ //   var service = $resource("/articles/.json", {id: "5"}, {get: {method: "GET"}});
+
+//alert("update" + service);
+
 
 	// The data model. These items would normally be requested via AJAX,
 	// but are hardcoded here for simplicity. See the next example for
 	// tips on using AJAX.
 
-	$scope.items = [
+	$scope.items1 = [
 		{
 			url: 'http://www.tutorialspoint.com/android/',
 			title: 'Android tutorials',
@@ -80,4 +127,4 @@ function InstantSearchController($scope){
 	];
 
 
-}
+});

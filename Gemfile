@@ -13,6 +13,8 @@ gem 'autoprefixer-rails'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem "mysql2", "~> 0.3.0"
+gem 'bower-rails'
+gem 'angular-rails-templates'
 
 
 group :development, :test do
