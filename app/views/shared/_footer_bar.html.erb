@@ -1,13 +1,30 @@
 <!-- Site footer -->
 
-
 <div class="bottom" >
- <div class="whatToread"><tr><td> What to Read Next </td></tr>
-<tr><td><%= will_paginate @articles1, :param_name => 'fpage'%> </td></tr></div>
-    <div class="container">
-        
-            <% @articles1.each do |article| %>
-        <div class="col-md-3"><table width="20%">
+    
+
+<table colspan ="2" class="whatToread"><tr><td style="width:80%">
+ <div><table colspan="1" style="width:80%" ><tr><td><h4> What to Read Next <h4></td></tr>
+</table></div></td>
+
+<td style="width:20%">
+ <div class="" style="align:right"><table colspan="3" >
+     <tr><td> 
+ <%= link_to image_tag("left_arrow.gif", {:controller => "articles", :action => 'pageResults'}) %>
+ </td><td><%= image_tag("vertical_line.gif")%></td>
+<td align="rigth"><%= link_to image_tag("right_arrow.gif", {:controller => "articles", :action => 'pageResults'}) %>
+</td></tr>
+</table></div></td></tr>
+
+</table>
+
+
+    <div class="container" id="displayFooter">
+<% $i = 0
+$num = 4 %>
+<% while $i < $num  do %>
+<% article = @articleResults[rand(0..@articleResults.size-1)] %>
+<div class="col-md-3"><table width="20%">
 
  <tr><td> <%= link_to image_tag(url_for(:controller => "articles", 
  :action => "image_view_hero", 
@@ -17,16 +34,11 @@
     <tr>
       <td><%= link_to article.title, article_path(article) %></td> </tr>
         </div>
-
-          <% end %>
+<% $i +=1 %>
+<%end%>
+          
     </div>
-    
-
-
-
-            
-
-  
+ 
 </div>
 
 

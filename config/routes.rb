@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get 'footer/index'
   get 'articles/image_view_hero'       ## foo is the name of your controller
- get 'articles/image_view_optional'   
+ get 'articles/image_view_optional'
+ get 'articles/pageResults'
   resources :articles
 
   

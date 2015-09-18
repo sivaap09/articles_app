@@ -2,12 +2,14 @@ class ArticlesController < ApplicationController
     
     def index
         @topArticle = Article.all
-        @articles = Article.order(publication_date: :desc).paginate(page: params[:mpage], :per_page => 3)
+        @articleResults = Article.all
+        @articles = Article.order(publication_date: :asc)
         @articles1 = Article.order(publication_date: :desc).paginate(page: params[:fpage], :per_page => 4) 
     end
   
   def new
         @articles1 = Article.paginate(page: params[:fpage], :per_page => 4) 
+         @articleResults = Article.all
   end
   
   def create
@@ -27,7 +29,7 @@ class ArticlesController < ApplicationController
         @article.optional_image_contenttype = params[:article][:optional_image].content_type
       end
 @article.save()
-
+ @articleResults = Article.all
       redirect_to @article
       
   end
@@ -39,6 +41,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])  
  @articles = Article.paginate(page: params[:mpage], :per_page => 3)
         @articles1 = Article.paginate(page: params[:fpage], :per_page => 4) 
+         @articleResults = Article.all
   end
    
 def image_view_hero
@@ -65,6 +68,8 @@ end
     @article = Article.find(params[:id])
             @articles = Article.order(publication_date: :desc).paginate(page: params[:mpage], :per_page => 3)
         @articles1 = Article.paginate(page: params[:fpage], :per_page => 4)
+        
+         @articleResults = Article.all
   end
     
     def update
@@ -96,17 +101,21 @@ end
       end
     @articleOld.destroy
    @article.save()
-
+ @articleResults = Article.all
       redirect_to @article
    end
    
 def destroy
     @article = Article.find(params[:id])
     @article.destroy
- 
+ @articleResults = Article.all 
     redirect_to articles_path
   end
  
+ def pageResults
+ @articleResults = Article.all
+ redirect_to articles_path
+ end
    private
   def article_params
     params.require(:article).permit(:title, :author, :category, :hero_image, :hero_image_filename, :hero_image_contenttype, :optional_image, :optional_image_filename, :optional_image_contenttype, :content_body)
