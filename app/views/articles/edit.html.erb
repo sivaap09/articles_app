@@ -1,6 +1,6 @@
 <h1>Edit Article</h1>
 
-<%= form_for(:article, :url=>{:action=>'update'},   :method => :PATCH, :html=>{:multipart=>true}) do |f|%>
+<%= form_for(:article, :url=>{:action=>'update'},   :method => :PUT, :html=>{:multipart=>true}) do |f|%>
 
   <p>
     <%= f.label :title %><br>

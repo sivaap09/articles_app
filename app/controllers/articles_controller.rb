@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
  
   
   def show
-    
+            @relatedArticles = Article.all.order("id desc").limit(10)
     @article = Article.find(params[:id])  
  @articles = Article.paginate(page: params[:mpage], :per_page => 3)
         @articles1 = Article.paginate(page: params[:fpage], :per_page => 4) 
@@ -68,13 +68,36 @@ end
   end
     
     def update
-       @article = Article.find(params[:id])
+        
+        @articleOld = Article.find(params[:id])
+
+       @article =  Article.new(article_params)
  
-      if @article.update(article_params)
-        redirect_to @article
-      else
-         redirect_to @article
+        @article.publication_date = Time.zone.now
+        
+
+      if params[:article][:hero_image]
+        @article.hero_image = params[:article][:hero_image].read
+        @article.hero_image_filename = params[:article][:hero_image].original_filename
+        @article.hero_image_contenttype = params[:article][:hero_image].content_type
+    else
+        @article.hero_image = @articleOld.hero_image
+        @article.hero_image_filename =  @articleOld.hero_image_filename
+        @article.hero_image_contenttype =  @articleOld.hero_image_contenttype
       end
+      if params[:article][:optional_image]
+           @article.optional_image = params[:article][:optional_image].read
+           @article.optional_image_filename = params[:article][:optional_image].original_filename
+            @article.optional_image_contenttype = params[:article][:optional_image].content_type
+        else
+        @article.optional_image = @articleOld.optional_image
+        @article.optional_image_filename =  @articleOld.optional_image_filename
+        @article.optional_image_contenttype =  @articleOld.optional_image_contenttype
+      end
+    @articleOld.destroy
+   @article.save()
+
+      redirect_to @article
    end
    
 def destroy
@@ -86,7 +109,7 @@ def destroy
  
    private
   def article_params
-    params.require(:article).permit(:title, :author, :category, :hero_image, :filename, :content_type, :optional_image, :content_body)
+    params.require(:article).permit(:title, :author, :category, :hero_image, :hero_image_filename, :hero_image_contenttype, :optional_image, :optional_image_filename, :optional_image_contenttype, :content_body)
   end
 
 

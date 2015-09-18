@@ -1,11 +1,9 @@
 <!-- Site footer -->
 
 
-<div class="bottom" b>
- <div class="whatToread"><tr><td><B> What to Read Next </B></td></tr> 
-<div > <tr><td></td><%= will_paginate @articles1, :param_name => 'fpage'%></td></tr></div> </div>
- 
-
+<div class="bottom" >
+ <div class="whatToread"><tr><td> What to Read Next </td></tr>
+<tr><td><%= will_paginate @articles1, :param_name => 'fpage'%> </td></tr></div>
     <div class="container">
         
             <% @articles1.each do |article| %>

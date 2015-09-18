@@ -1,13 +1,26 @@
-<p>
-   <table>
-  <tr><td></td></tr><H2><%= @article.title %></H2></td></tr>
+<div style= "padding-left:15px;">
+   <table colspan="3" width="400" height="150">
+  <tr><td><H2><%= @article.title %></H2></td></tr>
      <tr><td><%= @article.publication_date.strftime("%A %B #{@article.publication_date.day.ordinalize}, %Y")  %> | <%= @article.author %></td></tr>
 
     <% if not @article.hero_image_filename.nil?  %>
     
 <tr><td><img src="<%= url_for(:controller => "articles", 
  :action => "image_view_hero", 
- :id => @article.id) %>"  width="400"  height="200" /></td></tr>
+ :id => @article.id) %>"  width="400"  height="200" /></td><td width="50">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+ </td><td><table  width="200">
+  <th><h3>Related links </h3></th>
+      <% @relatedArticles.each do |article| %>
+ <tr>
+   <td><%= link_to article.title, article_path(article) %></td>
+ 
+   </tr>
+  <% end %>
+  
+  </table></td></tr>
+   
+
+  
  <% end%>
  
  <% if not @article.optional_image_filename.nil?  %>
@@ -15,10 +28,11 @@
  :action => "image_view_optional", 
  :id => @article.id) %>"  width="400"  height="200"/></td></tr>
   <% end%>
-     <tr><td><%= @article.content_body %></td></tr>
-
+     <tr><td><%= @article.content_body %></td> </tr>
+  
 </table>
-</p>
+
  
- 
+
  <%= link_to 'Back', articles_path %>
+</div>

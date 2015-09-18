@@ -1,6 +1,5 @@
+<div style= "padding-left:15px;">
 
-<B>Listing articles</B>
- <%= link_to 'Create article', new_article_path %>
 <% topArticleTODisplay = @topArticle[rand(0..@topArticle.size)] %>
  <% if not topArticleTODisplay.nil?  %>
   <table>
@@ -21,7 +20,7 @@
 <%end%>
 
 
-
+<div style= "padding-left:50px;">
  
   <% @articles.each do |article| %>
   <table>
@@ -38,4 +37,7 @@
               data: { confirm: 'Are you sure?' } %></td>
             </table><br>
   <% end %>
+  </div>
   
+   <B><%= link_to 'Create article', new_article_path %></B>
+</div> 
