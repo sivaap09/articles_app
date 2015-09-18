@@ -1,31 +1,41 @@
 
+<B>Listing articles</B>
+ <%= link_to 'Create article', new_article_path %>
+<% topArticleTODisplay = @topArticle[rand(0..@topArticle.size)] %>
+ <% if not topArticleTODisplay.nil?  %>
+  <table>
+
+    <tr>
+      <td><H3><%= link_to topArticleTODisplay.title, article_path(topArticleTODisplay) %></H3></td> </tr>
+      
+      <tr><td><%= topArticleTODisplay.publication_date.strftime("%A %B #{topArticleTODisplay.publication_date.day.ordinalize}, %Y")  %> | <%= topArticleTODisplay.author %></td></tr>
+
+                           <% if not topArticleTODisplay.hero_image_filename.nil?  %>
+ <tr><td><img  src="<%= url_for(:controller => "articles", 
+ :action => "image_view_hero", 
+ :id => topArticleTODisplay.id) %>"  width="400"  height="200" /></td></tr>
+ <%end%>
+      <tr><td><%= topArticleTODisplay.content_body %></td></tr>
+
+            </table><br>
+<%end%>
 
 
-
-
-
-<h1>Listing articles</h1>
-
- <%= link_to 'New article', new_article_path %>
-
-<table>
 
  
   <% @articles.each do |article| %>
+  <table>
+
     <tr>
-      <td><%= link_to article.title, article_path(article) %></td> </tr>
-      <tr><td>asdsad<%= article.publication_date.to_formatted_s %></td></tr>
-      <tr><td><%= article.author %></td></tr>
-      <tr><td><%= article.category %></td></tr>
-            <tr><td><%= article.filename %></td></tr>
-                        <tr><td><%= article.content_type %></td></tr>
+      <td><H3><%= link_to article.title, article_path(article) %></H3></td> </tr>
+      
+      <tr><td><%= article.publication_date.strftime("%A %B #{article.publication_date.day.ordinalize}, %Y")  %> | <%= article.author %></td></tr>
 
       <tr><td><%= article.content_body %></td></tr>
-
-            
+<td> <%= link_to 'Edit article', edit_article_path(article) %>
+ <%= link_to 'Delete article', article_path(article),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+            </table><br>
   <% end %>
   
-
-</table>
-
-  <%= will_paginate @articles, :param_name => 'mpage'%>

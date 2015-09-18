@@ -1,20 +1,23 @@
-<H2> Show article</H2>
 <p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-  <%= @article.content_type %>
-    <%= @article.filename %>
+   <table>
+  <tr><td></td></tr><H2><%= @article.title %></H2></td></tr>
+     <tr><td><%= @article.publication_date.strftime("%A %B #{@article.publication_date.day.ordinalize}, %Y")  %> | <%= @article.author %></td></tr>
+
+    <% if not @article.hero_image_filename.nil?  %>
     
-    <% if not @article.filename.nil?  %>
-    sadsaddadas
-<img src="<%= url_for(:controller => "articles", 
- :action => "image_view", 
- :id => @article.id) %>" />
+<tr><td><img src="<%= url_for(:controller => "articles", 
+ :action => "image_view_hero", 
+ :id => @article.id) %>"  width="400"  height="200" /></td></tr>
+ <% end%>
  
+ <% if not @article.optional_image_filename.nil?  %>
+<tr><td> <img src="<%= url_for(:controller => "articles", 
+ :action => "image_view_optional", 
+ :id => @article.id) %>"  width="400"  height="200"/></td></tr>
   <% end%>
-   
+     <tr><td><%= @article.content_body %></td></tr>
 
-
+</table>
 </p>
  
  

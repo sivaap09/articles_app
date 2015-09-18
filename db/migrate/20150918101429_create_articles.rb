@@ -6,9 +6,11 @@ class CreateArticles < ActiveRecord::Migration
       t.datetime :publication_date
       t.string :category
       t.binary :hero_image
+      t.string :hero_image_filename
+      t.string :hero_image_contenttype
       t.binary :optional_image
-      t.string :filename
-      t.string :content_type
+      t.string :optional_image_filename
+      t.string :optional_image_contenttype
       t.text :content_body
 
       t.timestamps null: false

@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916111138) do
+ActiveRecord::Schema.define(version: 20150918101429) do
 
   create_table "articles", force: :cascade do |t|
-    t.string   "title",            limit: 255
-    t.string   "author",           limit: 255
+    t.string   "title",                      limit: 255
+    t.string   "author",                     limit: 255
     t.datetime "publication_date"
-    t.string   "category",         limit: 255
-    t.binary   "hero_image",       limit: 65535
-    t.binary   "optional_image",   limit: 65535
-    t.string   "filename",         limit: 255
-    t.string   "content_type",     limit: 255
-    t.text     "content_body",     limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "category",                   limit: 255
+    t.binary   "hero_image",                 limit: 65535
+    t.string   "hero_image_filename",        limit: 255
+    t.string   "hero_image_contenttype",     limit: 255
+    t.binary   "optional_image",             limit: 65535
+    t.string   "optional_image_filename",    limit: 255
+    t.string   "optional_image_contenttype", limit: 255
+    t.text     "content_body",               limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
 end
