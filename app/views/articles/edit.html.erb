@@ -1,4 +1,4 @@
-<h1>Edit Article</h1>
+<div style= "padding-left:15px;">
 
 <%= form_for(:article, :url=>{:action=>'update'},   :method => :PUT, :html=>{:multipart=>true}) do |f|%>
 
@@ -39,3 +39,5 @@
 <% end %>
 
 <%= link_to 'Back', articles_path %>
+
+</div>

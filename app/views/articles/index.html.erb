@@ -3,7 +3,7 @@
 
 <div style= "padding-left:15px;">
 
-<% topArticleTODisplay = @topArticle[rand(0...@topArticle.size)] %>
+<% topArticleTODisplay = @articleResults[rand(0...@articleResults.size)] %>
  <% if not topArticleTODisplay.nil?  %>
   <table>
 
@@ -42,5 +42,8 @@
   <% end %>
   </div>
   
-   <B><%= link_to 'Create article', new_article_path %></B>
+   <B><%= link_to 'Create article', new_article_path %></B> 
+  <%= will_paginate @articles, :param_name => 'mpage'%>
+
+   
 </div> 

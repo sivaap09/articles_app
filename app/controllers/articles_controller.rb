@@ -1,15 +1,12 @@
 class ArticlesController < ApplicationController
     
     def index
-        @topArticle = Article.all
         @articleResults = Article.all
-        @articles = Article.order(publication_date: :asc)
-        @articles1 = Article.order(publication_date: :desc).paginate(page: params[:fpage], :per_page => 4) 
+        @articles = Article.order(publication_date: :asc).paginate(page: params[:mpage], :per_page => 3) 
     end
   
   def new
-        @articles1 = Article.paginate(page: params[:fpage], :per_page => 4) 
-         @articleResults = Article.all
+        @articleResults = Article.all
   end
   
   def create
