@@ -1,38 +1,59 @@
 <div style= "padding-left:15px;">
-   <table colspan="3" width="400" height="150">
+<table colspan="3" width="400" height="150">
   <tr><td><H2><%= @article.title %></H2></td></tr>
-     <tr><td><%= @article.publication_date.strftime("%A %B #{@article.publication_date.day.ordinalize}, %Y")  %> | <%= @article.author %></td></tr>
-
+  <tr><td><%= @article.publication_date.strftime("%A %B #{@article.publication_date.day.ordinalize}, %Y")  %> | <%= @article.author %></td></tr>
+  <tr><td>
     <% if not @article.hero_image_filename.nil?  %>
-    
-<tr><td><img src="<%= url_for(:controller => "articles", 
- :action => "image_view_hero", 
- :id => @article.id) %>"  width="400"  height="200" /></td><td width="50">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
- </td><td><table  width="200">
-  <th><h3>Related links </h3></th>
-      <% @relatedArticles.each do |article| %>
- <tr>
-   <td><%= link_to article.title, article_path(article) %></td>
- 
+       <img src="<%= url_for(:controller => "articles", :action => "image_view_hero", :id => @article.id) %>"  width="400"  height="200" />
+    <%end%>
+ </td>
+ <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+ <td>
+     <% if not @article.optional_image_filename.nil?  %>
+      <img src="<%= url_for(:controller => "articles", :action => "image_view_optional", :id => @article.id) %>"  width="400"  height="200"/>
+     <% end%>
+   </td>
    </tr>
-  <% end %>
-  
-  </table></td></tr>
-   
+ <tr><td>
+  <table  width="500">
+   <tr><td><%= @article.content_body %></td></tr>
+   <% if not @articleResults.nil?  %>
+      <% $i = 0 %>
+      <% unless @articleResults.size >= 4 %>
+        <% $num = @articleResults.size %>
+      <%else %>
+        <% $num = 4 %>
+      <%end%>
+   <tr> 
+    <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+    <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+    <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+   </tr>
 
-  
- <% end%>
- 
- <% if not @article.optional_image_filename.nil?  %>
-<tr><td> <img src="<%= url_for(:controller => "articles", 
- :action => "image_view_optional", 
- :id => @article.id) %>"  width="400"  height="200"/></td></tr>
-  <% end%>
-     <tr><td><%= @article.content_body %></td> </tr>
-  
+<%end%> 
+  </table>
+  </td> 
+ <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+ <td><table  width="400">
+  <th><h3>Related links </h3></th>
+   <% if not @articleResults.nil?  %>
+     <% $i = 0 %>
+     <% unless @articleResults.size >= 4 %>
+       <% $num = @articleResults.size %>
+     <%else%>
+       <% $num = 4 %>
+     <%end%>
+     <% while $i < $num  do %>
+           <% article = @articleResults[rand(0...@articleResults.size)] %>
+         <tr>
+           <td><%= link_to article.title, article_path(article) %></td>
+           <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+           <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+         </tr>
+         <% $i +=1 %>
+     <% end %>
+   <% end %>
+  </table></td><tr></tr>
 </table>
-
- 
-
- <%= link_to 'Back', articles_path %>
+<%= link_to 'Back', articles_path %>
 </div>

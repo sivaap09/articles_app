@@ -1,49 +1,33 @@
-
-
-
-<div style= "padding-left:15px;">
-
-<% topArticleTODisplay = @articleResults[rand(0...@articleResults.size)] %>
- <% if not topArticleTODisplay.nil?  %>
-  <table>
-
-    <tr>
-      <td><H3><%= link_to topArticleTODisplay.title, article_path(topArticleTODisplay) %></H3></td> </tr>
-      
-      <tr><td><%= topArticleTODisplay.publication_date.strftime("%A %B #{topArticleTODisplay.publication_date.day.ordinalize}, %Y")  %> | <%= topArticleTODisplay.author %></td></tr>
-
-                           <% if not topArticleTODisplay.hero_image_filename.nil?  %>
- <tr><td><img  src="<%= url_for(:controller => "articles", 
- :action => "image_view_hero", 
- :id => topArticleTODisplay.id) %>"  width="400"  height="200" /></td></tr>
- <%end%>
-      <tr><td><%= topArticleTODisplay.content_body %></td></tr>
-
-            </table><br>
-<%end%>
-
+<div style= "padding-left:15px;width:1000px;">
+    <B><%= link_to 'Create article', new_article_path %></B> 
+    <% previewArticle = @previewArticles[rand(0...@previewArticles.size)] %>
+    <% if not previewArticle.nil?  %>
+        <table>
+            <tr>
+                <td><H3><%= link_to previewArticle.title, article_path(previewArticle) %></H3></td> 
+            </tr>
+            <tr>
+                <td><%= previewArticle.publication_date.strftime("%A %B #{previewArticle.publication_date.day.ordinalize}, %Y")  %> | <%= previewArticle.author %></td></tr>
+                  <% if not previewArticle.hero_image_filename.nil?  %>
+                     <tr><td><img  src="<%= url_for(:controller => "articles", :action => "image_view_hero", :id => previewArticle.id) %>"  width="400"  height="200" /></td></tr>
+                  <%end%>
+            <tr><td><%= previewArticle.content_body %></td></tr>
+        </table><br>
+    <%end%>
 
 <div style= "padding-left:50px;">
- 
-  <% @articles.each do |article| %>
-  <table>
+    <% @articles.each do |article| %>
+        <table>
+            <tr>
+                <td><H3><%= link_to article.title, article_path(article) %></H3></td>
+            </tr>
+            <tr><td><%= article.content_body %></td></tr>
+            <td><B><%= link_to 'Edit article', edit_article_path(article) %> </B> 
+                <B><%= link_to 'Delete article', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %></B>
+            </td>
+        </table><br>
+    <% end %>
+</div>
 
-    <tr>
-      <td><H3><%= link_to article.title, article_path(article) %></H3></td> </tr>
-      
-
-
-      <tr><td><%= article.content_body %></td></tr>
-<td> <%= link_to 'Edit article', edit_article_path(article) %>
- <%= link_to 'Delete article', article_path(article),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-            </table><br>
-  <% end %>
-  </div>
-  
-   <B><%= link_to 'Create article', new_article_path %></B> 
-  <%= will_paginate @articles, :param_name => 'mpage'%>
-
-   
+<%= will_paginate @articles, :param_name => 'mpage'%>
 </div> 
